@@ -1,11 +1,13 @@
 <script>
     import Home from "./home.vue"
     import signin from "./signin.vue"
+    import login from "./login.vue"
     import notFound from "./components/notfound.vue"
 
     const routes={
         "/":Home,
-        "/signin":signin
+        "/signin":signin,
+        '/login':login
     }
 
     export default{

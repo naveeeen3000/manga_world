@@ -1,15 +1,48 @@
+
+<script>
+
+
+export default{
+    data(){
+        return{
+            name: '',
+            email: '',
+            pass: '',
+        }
+    },
+    methods: {
+        submitDetails(){
+            let payload={
+                name:this.name,
+                email:this.email,
+                password: this.pass,
+                created_at: Date()
+            }
+            console.log(payload)
+            // const res=fetch()
+        }
+    }
+
+}
+
+
+</script>
+
+
+
+
 <template>
     <div class="signup">
-        <form action="">
-        <div class="signup-form">
-                <input type="text" placeholder="your name">
-                <input type="email" placeholder="your email">
-                <input type="password" placeholder="your password">
-                <button  type="submit">signup</button>
-        </div>
+    <div class="bgimage"></div>
+        <div class="signup-from">
+            <img class="signup-logo" src="../assets/logo.png" alt="not found" >
+            <h3 class="form-heading">Signup</h3>
+            <form  action="">
+                <input v-model="name" type="text" placeholder="your name">
+                <input v-model="email" type="email" placeholder="your email">
+                <input v-model="pass" type="password" placeholder="your password">
+                <input class="submit-button" @click.prevent="submitDetails()" type="submit" value="Signup">
         </form>
-        <div class="image">
-            <img src="../assets/login_image.jpg" alt="not found" width="800px" height="400  ">
         </div>
     </div>
 </template>
@@ -17,28 +50,78 @@
 
 
 <style>
-
-
-.signup{
-    margin: 40px;
+ @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+.bgimage{
+    background-image: url("../assets/signup_image.png");    
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+    height: 800px; 
+    margin:40px;
     box-shadow:0 15px 30px 0 rgba(0, 0, 0, 0.2);
-    display: flex;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.signup-from{
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    box-shadow:0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    border-radius: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 30%;
+    padding: 20px;
     
 }
-.image{
-    margin:0px;
+.signup-logo{
+    height:200px;
+    width:300px;
+}
+img{
+    margin-left: 25%;
 }
 
-.signup-form{
-    /* margin-right:auto; */
-    padding:80px;
+.form-heading{
+    margin: auto;
+    margin-left: 45%;
+    font-size: large;
+    font-family: 'Prompt', sans-serif;
+}
+
+.signup-from form{
     display: flex;
+    padding:20px;
     flex-direction: column;
+    
     justify-content: space-between;
 }
+.signup-from input{
+    margin: auto;
+    font-size: large;
+    margin-bottom: 15px;
+    color:white;
+    background-color: rgb(84, 84, 84,0.8);
+    border-radius: 6px;
+    border: 0px;
+    width: 80%;
+    height: 40px;
+}
 
-input{
-    
+.signup-from input[type=submit]{
+    margin: auto;
+    font-size: x-large;
+    margin-top:10px;
+    /* color:black; */
+    border:0px;
+    background-color: rgb(0, 229, 255);
+    width: 80%;
+    height: 40px;
 }
 
 </style>
