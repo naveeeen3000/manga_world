@@ -8,21 +8,37 @@ export default{
             name: '',
             email: '',
             pass: '',
+            error:'',
         }
     },
     methods: {
-        submitDetails(){
+        async submitDetails(){
             let payload={
-                name:this.name,
-                email:this.email,
-                password: this.pass,
-                created_at: Date()
+                "name":this.name,
+                "email":this.email,
+                "password": this.pass,  
+                "created_at": Date()
             }
             console.log(payload)
-            // const res=fetch()
+            let url='http://127.0.0.1:8000/api/v1/user/'
+            let otherparams={
+                "headers": {
+                    "Authorization":"Token "+import.meta.env.VITE_API_KEY,
+                    "Content-Type":"application/json"
+                },
+                "body": JSON.stringify(payload),
+                "method": "POST"
+            }
+            const res=await fetch(url,otherparams)
+            let response=await res.json()
+            if(res.status==201){
+                this.error=response.data
+            }
+            else{
+                this.error=response.data
+            }
         }
     }
-
 }
 
 
@@ -37,11 +53,11 @@ export default{
         <div class="signup-from">
             <img class="signup-logo" src="../assets/logo.png" alt="not found" >
             <h3 class="form-heading">Signup</h3>
-            <form  action="">
+            <form  action="#/login">
                 <input v-model="name" type="text" placeholder="your name">
                 <input v-model="email" type="email" placeholder="your email">
                 <input v-model="pass" type="password" placeholder="your password">
-                <input class="submit-button" @click.prevent="submitDetails()" type="submit" value="Signup">
+                <input class="submit-button" @click="submitDetails()" type="submit" value="Signup">
         </form>
         </div>
     </div>
