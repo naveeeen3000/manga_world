@@ -35,6 +35,7 @@ export default{
                 this.error=response.data
             }
             else{
+                confirm(response.data)
                 this.error=response.data
             }
         }
@@ -53,11 +54,11 @@ export default{
         <div class="signup-from">
             <img class="signup-logo" src="../assets/logo.png" alt="not found" >
             <h3 class="form-heading">Signup</h3>
-            <form  action="#/login">
+            <form  action="/login">
                 <input v-model="name" type="text" placeholder="your name">
                 <input v-model="email" type="email" placeholder="your email">
                 <input v-model="pass" type="password" placeholder="your password">
-                <input class="submit-button" @click="submitDetails()" type="submit" value="Signup">
+                <input class="submit-button" @click="submitDetails(ele)" type="submit" value="Signup">
         </form>
         </div>
     </div>
@@ -80,8 +81,8 @@ export default{
 }
 
 .signup-from{
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.8); /* Black w/opacity/see-through */
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0, 0, 0, 0.8); 
     color: white;
     font-weight: bold;
     box-shadow:0 15px 30px 0 rgba(0, 0, 0, 0.2);

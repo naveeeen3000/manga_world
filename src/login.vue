@@ -1,6 +1,6 @@
 <script>
 import navBar from "./components/nav.vue"
-import login from "./components/login.vue"
+import login from "../login.vue"
 export default{
     data(){
         return{
