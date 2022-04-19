@@ -2,28 +2,32 @@
     import Home from "./home.vue"
     import signin from "./signin.vue"
     import login from "./login.vue"
+    import mangaDetails from "./mangaDetails.vue"
     import notFound from "./components/notfound.vue"
 
     const routes={
         "/":Home,
         "/signin":signin,
-        '/login':login
+        '/login':login,
+        "/manga/": mangaDetails,
+        "/not_found":notFound
     }
 
     export default{
         data(){
             return {
-                currentPath: window.location.hash
+                currentPath: window.location.pathname
             }
         },
         computed:{
             currentView(){
-                return routes[this.currentPath.slice(1) || "/"] || notFound
+                console.log(this.currentPath)
+                return routes[this.currentPath || "/"] || notFound
             }
         },
         mounted(){
             window.addEventListener('hashchange',()=>{
-                this.currentPath=window.location.hash
+                this.currentPath=window.location.pathname
             })
         }
     }

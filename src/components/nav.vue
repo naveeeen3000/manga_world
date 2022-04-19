@@ -133,8 +133,8 @@ nav a{
         </div>
     </div>
     <div class="accounts">
-      <a class="" href="#/login">Login</a>
-      <a class="" href="#/signin">Signup</a>
+      <a class="" href="/login">Login</a>
+      <a class="" href="/signin">Signup</a>
   <div class="main-nav">
   </div>
     </div>
