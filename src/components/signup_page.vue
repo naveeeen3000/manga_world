@@ -22,7 +22,7 @@ export default{
             let url='http://127.0.0.1:8000/api/v1/user/'
             let otherparams={
                 "headers": {
-                    "Authorization":"Token "+import.meta.env.VITE_API_KEY,
+                    "Authorization":"Token "+process.env.VUE_APP_API_KEY,
                     "Content-Type":"application/json"
                 },
                 "body": JSON.stringify(payload),
@@ -31,7 +31,7 @@ export default{
             const res=await fetch(url,otherparams)
             let response=await res.json()
             if(res.status==201){
-                this.error=response.data
+                window.location='/login'
             }
             else{
                 confirm(response.data)
@@ -57,7 +57,7 @@ export default{
                 <input v-model="name" type="text" placeholder="your name">
                 <input v-model="email" type="email" placeholder="your email">
                 <input v-model="pass" type="password" placeholder="your password">
-                <input class="submit-button" @click="submitDetails(ele)" type="submit" value="Signup">
+                <input class="submit-button" @click.prevent="submitDetails(ele)" type="submit" value="Signup">
         </form>
         </div>
     </div>
