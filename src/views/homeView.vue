@@ -1,7 +1,13 @@
-<script setup>
+<script>
 
 import navBar from "../components/navBar.vue";
 import homePage from "../components/home_page.vue"
+export default{
+  components:{
+    navBar: navBar,
+    homePage: homePage
+  }
+}
 </script>
 
 
@@ -14,3 +20,12 @@ import homePage from "../components/home_page.vue"
     <homePage />
   </main>
 </template>
+
+
+<style>
+body,html{
+  background-color: black;
+  color:rgb(168, 172, 173);
+}
+
+</style>

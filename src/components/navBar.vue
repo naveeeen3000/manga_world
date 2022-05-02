@@ -11,7 +11,6 @@ export default{
     async search(query){
         this.search_result=[]
         let API_key=process.env.VUE_APP_API_KEY
-        // console.log(API_key)
         var url="http://127.0.0.1:8000/api/v1/search/?q="+query
         const res=await fetch(url,{headers:{"Authorization":"Token "+API_key}})
         let d= await res.json()
@@ -134,7 +133,6 @@ nav a{
               </div>
             </div>    
           </div>
-      
         </div>
     </div>
     <div class="accounts">
