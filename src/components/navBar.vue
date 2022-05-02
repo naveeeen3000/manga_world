@@ -1,17 +1,23 @@
 <script>
-// import process from "./package.json"
+import MangaDeatils from './mangaDetails.vue'
 export default{
   data(){
     return{
     query:'',
-    search_result: {}
+    search_result: {},
+    thisManga: {},
+    show_modal: false
     }
   },
+  components:{
+    "MangaDetails": MangaDeatils,
+}
+  ,
   methods:{
     async search(query){
         this.search_result=[]
         let API_key=process.env.VUE_APP_API_KEY
-        var url="http://127.0.0.1:8000/api/v1/search/?q="+query
+        var url=process.env.VUE_APP_BASE_URL+"search/?q="+query
         const res=await fetch(url,{headers:{"Authorization":"Token "+API_key}})
         let d= await res.json()
         let out={'status':res.status,'data':d['data']}
@@ -120,9 +126,9 @@ nav a{
 
     <div class="search">
         <input placeholder="search for manga"  class="searchBar" type="text" v-model="query" @input="search(query)">
-        <div v-if="search_result.status==200" @focusin="visible()" @focusout="invisible()"  class="results" id="search-result"> 
+        <div v-if="search_result.status==200"  @focusin="visible()" @focusout="invisible()"  class="results" id="search-result"> 
           <div v-for="res in search_result.data" v-bind:key='res.manga_id'>
-            <div class="search-list">
+            <div class="search-list" @click="this.show_modal=true;this.thisManga=res">
               <div class="search-poster">
                 <img v-bind:src="res['posterImage']['tiny'] || null" alt="not found">
               </div>
@@ -143,4 +149,7 @@ nav a{
     </div>
     </div>
   </nav>
+  <Teleport to="body">
+      <MangaDetails :manga="this.thisManga" :show='this.show_modal' @close='this.show_modal=false'/>
+  </Teleport>
 </template>
