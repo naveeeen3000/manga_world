@@ -6,7 +6,7 @@ export default{
         return {
             popularManga: false,
             show_modal: false,
-            thisMangaId: ''
+            thisManga: ''
         }
     },
     components:{
@@ -23,22 +23,16 @@ export default{
                     "Content-Type":"application/json"
                 }
             }
-            console.log('asd')
             const response=await fetch(url,other_params)
             let data=await response.json()
             if(response.status!=200){
                 this.popularManga=false
             }
-            console.log('this is the function')
             this.popularManga=data['data']
         }
     },
     beforeMount(){
-        console.log('before mount')
         this.get_popular_manga()
-    },
-    mounted(){
-        console.log('mounted')
     }
 }
 </script>
@@ -53,15 +47,22 @@ export default{
         <div v-else class="famous">
             <!-- <p>{{popularManga}}</p> -->
             
-            <div :id="show_modal" @click="()=>{show_modal=true;this.thisMangaId=manga.manga_id;}" v-for="manga in popularManga" :key="manga['manga_id']" class="popular-manga-tile">
-                <img class="popular-manga-image" :src="manga.posterImage['medium']" :alt="manga.posterImage.tiny">
+            <div   v-for="manga in popularManga" :key="manga['manga_id']" class="popular-manga-tile" >
+                <img @click="this.show_modal=true;this.thisManga=manga" href="#" class="popular-manga-image" :src="manga.posterImage['medium']" :alt="manga.posterImage.tiny">
                 <h4 class="popular-manga-title">{{manga.titles.en||manga.titles.en_jp}}</h4>
             </div>
         </div>
     </div>
     <Teleport to="body">
-        <MangaDetails  :manga_id="this.thisMangaId" :show="show_modal" @close="show_modal=false" />
+        <MangaDetails  :manga="this.thisManga" :show="show_modal" @close="show_modal=false" />
     </Teleport>
+    <!-- <Teleport to="body">
+        <Transition>
+            <div v-if="this.show_modal" style="position:fixed">
+                this is teleported
+            </div>
+        </Transition>
+    </Teleport> -->
     <GenreConatiner genre="comedy" />
 </template>
 

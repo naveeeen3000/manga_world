@@ -52,15 +52,6 @@ export default{
         ...
     </template>
     </Suspense>
-    <!-- <div v-if="this.genreData" class="genre-container">
-        <h2 class="genre-container-title">{{this.genre}}</h2>
-        <div class="genre-list">
-            <div v-for="manga in this.genreData" :key="manga.title" class="genre-tile">
-                <img :src="manga.cover_image" alt="" class="genre-tile-image">
-                <h4 class="genre-tile-title">{{manga.title}}</h4>
-            </div>
-        </div>
-    </div> -->
 </template>
 
 
@@ -73,7 +64,7 @@ export default{
 .famous{
     /* border: 2px solid black; */
     margin:1.5rem;
-    /* overflow: scroll; */
+    overflow: scroll;
     scroll-behavior: smooth;
     padding: 10px;
     display: flex;
@@ -82,6 +73,9 @@ export default{
     /* flex-wrap:wrap; */
 }
 
+.famous::-webkit-scrollbar{
+    display: none;
+}
 .popular-manga-image{
     height:15rem;
     /* width:11rem; */
