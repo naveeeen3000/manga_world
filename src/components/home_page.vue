@@ -42,13 +42,10 @@ export default{
 <template>
     <div class="popular-manga-section">
         <h2 class="popular-manga-section-title">popular Manga</h2>
-        <div class="famous" v-if="!popularManga">
-            loading.......</div>
+        <div class="famous" v-if="!popularManga"></div>
         <div v-else class="famous">
-            <!-- <p>{{popularManga}}</p> -->
-            
             <div   v-for="manga in popularManga" :key="manga['manga_id']" class="popular-manga-tile" >
-                <img @click="this.show_modal=true;this.thisManga=manga" href="#" class="popular-manga-image" :src="manga.posterImage['medium']" :alt="manga.posterImage.tiny">
+                <a href="#"><img @click="this.show_modal=true;this.thisManga=manga" class="popular-manga-image" :src="manga.posterImage['medium']" alt=""></a>
                 <h4 class="popular-manga-title">{{manga.titles.en||manga.titles.en_jp}}</h4>
             </div>
         </div>
@@ -56,13 +53,6 @@ export default{
     <Teleport to="body">
         <MangaDetails  :manga="this.thisManga" :show="show_modal" @close="show_modal=false" />
     </Teleport>
-    <!-- <Teleport to="body">
-        <Transition>
-            <div v-if="this.show_modal" style="position:fixed">
-                this is teleported
-            </div>
-        </Transition>
-    </Teleport> -->
     <GenreConatiner genre="comedy" />
 </template>
 

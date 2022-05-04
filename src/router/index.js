@@ -2,7 +2,7 @@ import {createRouter, createWebHistory} from "vue-router"
 import homeView from "@/views/homeView.vue"
 import SignUpView from '@/views/signupView.vue'
 import loginView from "@/views/loginView.vue"
-
+import readMangaView from '@/views/readMangaView.vue'
 const routes=[
     {
         path: "/",
@@ -18,6 +18,11 @@ const routes=[
         path: '/login',
         name: 'login',
         component: loginView
+    },
+    {
+        path: '/read/:manga_title',
+        name: 'read Manga',
+        component: readMangaView
     }
 ]
 
