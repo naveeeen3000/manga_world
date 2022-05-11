@@ -206,4 +206,8 @@
     color:#fff;
     transition: all 0.2s ease-in;
 }
+.alternate-titles{
+    height:19.2rem;
+    overflow:hidden;
+}
 </style>
