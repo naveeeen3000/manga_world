@@ -56,13 +56,6 @@ export default{
     <Teleport to="body">
         <MangaDetails  :manga="this.thisManga" :show="show_modal" @close="show_modal=false" />
     </Teleport>
-    <!-- <Teleport to="body">
-        <Transition>
-            <div v-if="this.show_modal" style="position:fixed">
-                this is teleported
-            </div>
-        </Transition>
-    </Teleport> -->
     <GenreConatiner genre="comedy" />
 </template>
 
