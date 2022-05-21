@@ -1,17 +1,23 @@
 <script>
-
+import MangaDetails from './mangaDetails.vue'
 export default{
+    components:{
+    MangaDetails,
+},
     props:{
         genre: String
     },
     data(){
         return{
-            genreData:false
+            genreData:false,
+            show_modal:false,
+            thisManga:{}
         }
     },
     methods:{
         async get_manga_by_genre(){
             let url=process.env.VUE_APP_BASE_URL+'manga/?genre='+this.genre
+            console.log(this.genre)
             let other_params={
                 "headers":{
                     'Authorization':'Token '+process.env.VUE_APP_API_KEY
@@ -37,21 +43,18 @@ export default{
 
 
 <template>
-    <Suspense>
     <div class="popular-manga-section">
         <h2 class="popular-manga-section-title">{{this.genre}}</h2>
         <div  class="famous">
             <div  v-for="manga in this.genreData" :key="manga.title" class="popular-manga-tile">
-                <img class="popular-manga-image" :src="manga.cover_image" alt="">
+                <img @click="this.show_modal=true;this.thisManga=manga" class="popular-manga-image" :src="manga.cover_image" alt="">
                 <h4 class="popular-manga-title">{{manga.title}}</h4>
-                <!-- <p>{{manga}}</p> -->
             </div>
         </div>
     </div>
-    <template #fallback>
-        ...
-    </template>
-    </Suspense>
+    <Teleport to="body">
+        <MangaDetails :manga="this.thisManga" :show="show_modal" @close="show_modal=false"/>
+    </Teleport>
 </template>
 
 
@@ -79,7 +82,7 @@ export default{
 .popular-manga-image{
     height:15rem;
     /* width:11rem; */
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     opacity: 0.7;
     margin-right:1rem;
     margin-left: 0px;

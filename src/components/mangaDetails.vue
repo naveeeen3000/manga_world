@@ -15,47 +15,43 @@
             <div v-if="this.manga" class="modal-container">
                 <div class="top">
                     <a @click="$emit('close')" href="#"><i class="fi fi-rr-arrow-small-left"></i></a>
-                    <!-- <h3>{{manga.titles.en||manga.titles.en_jp}}</h3> -->
+                    <h3>{{manga.title}}</h3>
                 </div>
                 <div class="modal-header">
-                    <img v-if="this.manga.coverImage==null" src="../assets/error.png" alt="">
-                    <object v-else :data="this.manga.coverImage.small" >
-                        <img :src="this.manga.coverImage.original" alt="Just testing.">
+                    <img v-if="this.manga.cover==null" src="../assets/error.png" alt="">
+                    <object v-else :data="this.manga.cover.small"  >
+                        <img :src="this.manga.cover.original" alt="Just testing.">
                     </object>
                 </div>
                 <div class="modal-body">
                     <div class="poster">
-                        <img :src="this.manga.posterImage.small" alt="">
+                        <img :src="this.manga.cover_image" alt="">
                     </div>
                     <div class="info">
-                        <h2>{{manga.titles.en||manga.titles.en_jp}} ({{manga.startDate.split('-')[0]}})</h2>
-                        <span class="rating">Rating: <b>{{(Number(manga.averageRating)/10).toFixed(1)}}/10</b>
+                        <h2>{{manga.title}} ({{manga.release_date}})</h2>
+                        <span class="rating">Rating: <b>{{(Number(manga.average_rating)/10).toFixed(1)}}/10</b>
                             <span v-if="manga.status=='finished'" style="color:red"> FINISHED</span>
                             <span v-else style="color:green"> ONGOING</span>
                         </span>
                         <p class="manga-description">{{manga.description.split('(Source:')[0]}}</p>
-                        <span class="chapters">
+                        <!-- <span class="chapters">
                             <span v-if="manga.chapterCount!=null">chapters: {{manga.chapterCount}}</span>
                             <span v-if="manga.volumeCount!=null">volumes : {{manga.volumeCount}}</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="info-right">
                         <div class="alternate-titles">
                             <span><h3>Alterante Titles</h3></span>
                             <span class="titles">
-                                <span v-for="title in manga.titles" :key="title">
-                                    {{title}} 
-                                </span>
-                                <span v-for="title in manga.abbreviatedTitles" :key="title">
+                                <span v-for="title in manga.alternative.split(';')" :key="title">
                                     {{title}} 
                                 </span>
                             </span>
-                            
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a :href="'/read/'+manga.titles.en_jp"><button class="read-manga-button" >Read</button></a>
+                    <a :href="'/read/'+manga.title"><button class="read-manga-button" >Read</button></a>
                 </div>
             </div>
         </div>

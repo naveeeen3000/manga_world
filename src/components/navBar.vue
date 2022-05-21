@@ -21,6 +21,7 @@ export default{
         const res=await fetch(url,{headers:{"Authorization":"Token "+API_key}})
         let d= await res.json()
         let out={'status':res.status,'data':d['data']}
+        // console.log(out)
         this.search_result=out
     },
     invisible(){
@@ -130,12 +131,12 @@ nav a{
           <div v-for="res in search_result.data" v-bind:key='res.manga_id'>
             <div class="search-list" @click="this.show_modal=true;this.thisManga=res">
               <div class="search-poster">
-                <img v-bind:src="res['posterImage']['tiny'] || null" alt="not found">
+                <img v-bind:src="res['cover_image'] || null" alt="not found">
               </div>
               <div class="search-info">
-                <div class="title"><b>{{res.titles.en_jp}}</b></div>
+                <div class="title"><b>{{res.title}}</b></div>
                 <div class="status">{{res.status}}</div>
-                <div class="airdaate">Air Date: {{res.startDate}}</div>
+                <div class="airdaate">Air Date: {{res.release_date}}</div>
               </div>
             </div>    
           </div>

@@ -45,15 +45,19 @@ export default{
         <div class="famous" v-if="!popularManga"></div>
         <div v-else class="famous">
             <div   v-for="manga in popularManga" :key="manga['manga_id']" class="popular-manga-tile" >
-                <a href="#"><img @click="this.show_modal=true;this.thisManga=manga" class="popular-manga-image" :src="manga.posterImage['medium']" alt=""></a>
-                <h4 class="popular-manga-title">{{manga.titles.en||manga.titles.en_jp}}</h4>
+                <a href="#"><img @click="this.show_modal=true;this.thisManga=manga" class="popular-manga-image" :src="manga.cover_image" alt=""></a>
+                <h4 class="popular-manga-title">{{manga.title}}</h4>
             </div>
         </div>
     </div>
+    <GenreConatiner genre="adventure" />
+    <GenreConatiner genre="shounen" />
+    <GenreConatiner genre="comedy" />
+    <GenreConatiner genre="action" />
+    
     <Teleport to="body">
         <MangaDetails  :manga="this.thisManga" :show="show_modal" @close="show_modal=false" />
     </Teleport>
-    <GenreConatiner genre="comedy" />
 </template>
 
 <style>
