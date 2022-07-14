@@ -11,7 +11,7 @@ export default{
     },
     methods:{
         async get_manga(){
-            let url=process.env.VUE_APP_BASE_URL+'manga/read/?manga_title='+this.manga_title
+            let url=process.env.VUE_APP_BASE_URL+'api/v1/manga/read/?manga_title='+this.manga_title
             let other_params={
                 'headers':{
                     'Authorization':'Token '+process.env.VUE_APP_API_KEY,
@@ -45,7 +45,7 @@ export default{
                 </h2>
                 <span class="genre">
                     <span v-for="genre in this.manga.genre" :key="genre">
-                        {{genre}}
+                        {{genre[0].toUpperCase()+genre.slice(1)+"\t"}}
                     </span>
                 </span>
                 <h4 class="manga-au">

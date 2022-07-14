@@ -16,7 +16,7 @@ export default{
     ,
     methods:{
         async get_popular_manga(){
-            let url=process.env.VUE_APP_BASE_URL+'manga/popular'
+            let url=process.env.VUE_APP_BASE_URL+'api/v1/manga/popular'
             let other_params={
                 "headers":{
                     "Authorization":"Token "+process.env.VUE_APP_API_KEY,

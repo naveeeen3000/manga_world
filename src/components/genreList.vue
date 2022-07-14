@@ -16,7 +16,7 @@ export default{
     },
     methods:{
         async get_manga_by_genre(){
-            let url=process.env.VUE_APP_BASE_URL+'manga/?genre='+this.genre
+            let url=process.env.VUE_APP_BASE_URL+'api/v1/manga/?genre='+this.genre
             console.log(this.genre)
             let other_params={
                 "headers":{
@@ -47,7 +47,7 @@ export default{
         <h2 class="popular-manga-section-title">{{this.genre}}</h2>
         <div  class="famous">
             <div  v-for="manga in this.genreData" :key="manga.title" class="popular-manga-tile">
-                <img @click="this.show_modal=true;this.thisManga=manga" class="popular-manga-image" :src="manga.cover_image" alt="">
+                <a href="#"><img @click="this.show_modal=true;this.thisManga=manga" class="popular-manga-image" :src="manga.cover_image" alt=""></a>
                 <h4 class="popular-manga-title">{{manga.title}}</h4>
             </div>
         </div>
@@ -80,7 +80,7 @@ export default{
     display: none;
 }
 .popular-manga-image{
-    height:15rem;
+    height:13rem;
     /* width:11rem; */
     border-radius: 1rem;
     opacity: 0.7;
@@ -103,7 +103,7 @@ export default{
 
 .popular-manga-title{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* padding-left:3rem; */
+    height:40px;
     overflow:hidden;
     width: 10rem;
 }

@@ -16,10 +16,9 @@ export default{
                 "name":this.name,
                 "email":this.email,
                 "password": this.pass,  
-                "created_at": Date()
             }
             console.log(payload)
-            let url='http://127.0.0.1:8000/api/v1/user/'
+            let url=process.env.VUE_APP_BASE_URL+"/accounts/user/create"
             let otherparams={
                 "headers": {
                     "Authorization":"Token "+process.env.VUE_APP_API_KEY,

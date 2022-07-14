@@ -21,8 +21,9 @@ export default{
         <div class="chapter-modal-wrapper">
             <div class="chapter-modal-container">
                 <div class="top">
-                    <a @click="$emit('close')" href="#"><i class="fi fi-rr-arrow-small-left"></i></a>
-                    <h2>{{this.Key}}</h2>
+                    <a @click="$emit('close')" href="#"><i class="fi fi-rr-arrow-small-down"></i></a>
+                    <h2>{{key}}</h2>
+                    
                 </div>
                 <div class="chapter-modal-body">
                     <!-- <p>{{this.chapter}}</p> -->

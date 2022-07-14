@@ -5,7 +5,6 @@
 export default{
     data(){
         return{
-            name: '',
             email: '',
             pass: '',
             error:'',
@@ -14,16 +13,13 @@ export default{
     methods: {
         async submitDetails(){
             let payload={
-                "name":this.name,
                 "email":this.email,
                 "password": this.pass,  
-                "created_at": Date()
             }
-            console.log(payload)
-            let url='http://127.0.0.1:8000/api/v1/user/'
+            let url=process.env.VUE_APP_BASE_URL+'accounts/user/login'
             let otherparams={
                 "headers": {
-                    "Authorization":"Token "+import.meta.env.VITE_API_KEY,
+                    "Authorization":"Token "+process.env.VUE_APP_API_KEY,
                     "Content-Type":"application/json"
                 },
                 "body": JSON.stringify(payload),
@@ -31,12 +27,15 @@ export default{
             }
             const res=await fetch(url,otherparams)
             let response=await res.json()
-            if(res.status==201){
-                this.error=response.data
+            if(res.status==200){
+                this.$storage.setStorageSync('Token',response.data.token)
+                window.location='/'
+            }
+            else if(res.status==404){
+                this.error='User '+response.detail
             }
             else{
-                confirm(response.data)
-                this.error=response.data
+                this.error=response.error.message
             }
         }
     }
@@ -51,14 +50,20 @@ export default{
 <template>
     <div class="signup">
     <div class="bgimage"></div>
-        <div class="signup-from">
+        <div v-if="this.$storage.getStorageSync('Token')" class="signup-from">
+            <p>You are already logged in.</p>
+            <a href="/"><button>Go to Homepage</button></a>
+        </div>
+        <div v-else class="signup-from">
             <img class="signup-logo" src="../assets/logo.png" alt="not found" >
             <h3 class="form-heading">Login</h3>
+            
             <form  action="/login">
-                <input v-model="email" type="email" placeholder="your email">
-                <input v-model="pass" type="password" placeholder="your password">
-                <input class="submit-button" type="submit" value="Signup">
-        </form>
+                <input v-model="email" type="email" placeholder="your email" required>
+                <input v-model="pass" type="password" placeholder="your password" required>
+                <p style="color:red">{{this.error}}</p>
+                <input class="submit-button" type="submit" value="Signup" @click.prevent="submitDetails()">
+            </form>
         </div>
     </div>
 </template>
@@ -77,6 +82,13 @@ export default{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+button{
+    width:9 rem;
+    height:3rem;
+    font-size: medium;
+
 }
 
 .signup-from{
@@ -116,6 +128,11 @@ img{
     flex-direction: column;
     
     justify-content: space-between;
+}
+.signup-from p{
+    margin:auto;
+    font-size:large;
+    font-family: 'Prompt',sans-serif;
 }
 .signup-from input{
     margin: auto;
