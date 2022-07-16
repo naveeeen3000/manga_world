@@ -105,6 +105,9 @@ export default{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height:40px;
     overflow:hidden;
+    padding-right:0.5rem;
     width: 10rem;
+    font-size: medium;
+    font-weight: 200;
 }
 </style>

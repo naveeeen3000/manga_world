@@ -14,8 +14,8 @@
         <div class="modal-wrapper">
             <div v-if="this.manga" class="modal-container">
                 <div class="top">
-                    <a @click="$emit('close')" href="#"><i class="fi fi-rr-arrow-small-left"></i></a>
-                    <h3>{{manga.title}}</h3>
+                    <a @click="$emit('close')" href="#"><img height="40" width="40" src="https://img.icons8.com/stickers/100/000000/double-left.png"/></a>
+                    <h3><b>{{manga.title}}</b></h3>
                 </div>
                 <div class="modal-header">
                     <img v-if="this.manga.cover==null" src="../assets/error.png" alt="">
@@ -26,6 +26,9 @@
                 <div class="modal-body">
                     <div class="poster">
                         <img :src="this.manga.cover_image" alt="">
+                        <div class="modal-footer">
+                            <a :href="'/read/'+manga.manga_id"><button class="read-manga-button" >Read</button></a>
+                        </div>
                     </div>
                     <div class="info">
                         <h2>{{manga.title}} ({{manga.release_date}})</h2>
@@ -50,9 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a :href="'/read/'+manga.title"><button class="read-manga-button" >Read</button></a>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -80,6 +81,9 @@
 }
 .modal-container{
     width:80%;
+    height: 80%;
+    overflow-y:scroll;
+    overflow-x:hidden;
     margin:auto;
     background-color: rgb(0, 0, 0);
     /* padding:20px 30px; */
@@ -133,13 +137,15 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    /* height: 15rem;
+    width: 20rem; */
 }
 
 .poster img{
-    margin: -4rem 0px 0px 3rem ;
+    margin: -4rem 2rem 0px 3rem ;
     /* height:50%; */
-    width: 50%;
+    width: 7rem;
 }
 
 
@@ -161,6 +167,7 @@
     padding-left:20px;
 }
 .modal-body .info .manga-description{
+    margin-top: 1rem;
     width: 45rem;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -169,7 +176,11 @@
     flex-direction: column;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+.info{
+    margin-top:1rem;
+}
 .info-right{
+    margin-top:1rem;
     border-left: 2px solid #fff;
     padding-left: 10px;
     margin-left:10px;
@@ -183,16 +194,23 @@
 }
 .top{
     position: relative;
-    display: flex;   
+    display: flex;  
+    /* margin: 10px;  */
+    /* padding:10px; */
+}
+.top a{
+    margin:0px 10px 2px 0px;
 }
 [class^="fi-"]:before, [class*=" fi-"]:before, [class^="fi-"]:after, [class*=" fi-"]:after {
     font-size: 3rem;
 }
 .read-manga-button{
-    margin-left: 25%;
-    margin-top: 1rem;
+    margin:2rem 2rem 0px 2.5rem;
+    align-content: center;
+    /* margin-left: 25%; */
+    /* margin-top: 1rem; */
     border:0;
-    width:10rem;
+    width:8rem;
     height:3rem;
     font-size: large;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

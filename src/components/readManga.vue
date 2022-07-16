@@ -3,7 +3,7 @@ import chapterModal from './chapterModal.vue'
 export default{
     data(){
         return{
-            manga_title: this.$route.params.manga_title,
+            manga_id: this.$route.params.manga_id,
             manga: false,
             show_modal: false,
             thisChapter: {}
@@ -11,7 +11,7 @@ export default{
     },
     methods:{
         async get_manga(){
-            let url=process.env.VUE_APP_BASE_URL+'api/v1/manga/read/?manga_title='+this.manga_title
+            let url=process.env.VUE_APP_BASE_URL+'api/v1/manga/read/?manga_id='+this.manga_id
             let other_params={
                 'headers':{
                     'Authorization':'Token '+process.env.VUE_APP_API_KEY,
@@ -97,15 +97,16 @@ export default{
     width:50%;
 }
 .manga-chapters{
-    margin-top:-4rem;
-    margin-left:30%;
+    margin-top:-15rem;
+    margin-left:31rem;
     width:50%;
     
     box-shadow:0 2px 8px rgb(145, 145, 145);
 }
 
 .chapters-container{
-overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     height:20rem;
 }
 

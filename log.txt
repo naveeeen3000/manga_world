@@ -1,0 +1,5 @@
+src/components/home_page.vue:import MangaDetails from './mangaDetails.vue'
+src/components/home_page.vue:    MangaDetails: MangaDetails,
+src/components/home_page.vue:        <MangaDetails  :manga="this.thisManga" :show="show_modal" @close="show_modal=false" />
+src/components/navBar.vue:    "MangaDetails": MangaDeatils,
+src/components/navBar.vue:      <MangaDetails :manga="this.thisManga" :show='this.show_modal' @close='this.show_modal=false'/>

@@ -20,7 +20,7 @@ const routes=[
         component: loginView
     },
     {
-        path: '/read/:manga_title',
+        path: '/read/:manga_id',
         name: 'read Manga',
         component: readMangaView
     }

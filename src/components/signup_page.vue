@@ -8,7 +8,6 @@ export default{
             email: '',
             pass: '',
             error:'',
-            emailVerifyAlert: false,
             signedIn: false
         }
     }, 
@@ -33,30 +32,10 @@ export default{
             let response=await res.json()
             if(res.status==201){
                 this.signedIn=true
-                
             }
             else{
-                this.error=response.data
-            }
-        },
-        async verifyuser(){
-            let payload={
-                email: this.email
-            }
-            let url=process.env.VUE_APP_BASE_URL+'accounts/user/verify/'
-            let other_params={
-                'headers':{
-                    'Authorization': "Token "+process.env.VUE_APP_API_KEY,
-                    'Content-Type': 'application/json'
-                },
-                'body': JSON.stringify(payload),
-                'method': "POST"
-            }
-            const res=await fetch(url,other_params)
-            // let reponse=await res.json()
-            if(res.status==200){
-                this.emailVerifyAlert=true
-                // console.log(response)
+                
+                this.error=response.error.message
             }
         }
     }
@@ -83,6 +62,7 @@ export default{
                 <input v-model="name" type="text" placeholder="your name">
                 <input v-model="email" type="email" placeholder="your email">
                 <input v-model="pass" type="password" placeholder="your password">
+                <p>{{error}}</p>
                 <input class="submit-button" @click.prevent="submitDetails(ele)" type="submit" value="Signup">
             </form>
         </div>
