@@ -103,14 +103,16 @@ button{
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    width: 30%;
+    width: 30rem;
     padding: 20px;
     
 }
+
 .signup-logo{
-    height:200px;
-    width:300px;
+    height:10rem;
+    width:15rem;
 }
+
 img{
     margin-left: 25%;
 }

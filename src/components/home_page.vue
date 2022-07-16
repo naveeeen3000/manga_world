@@ -6,7 +6,7 @@ export default{
         return {
             popularManga: false,
             show_modal: false,
-            thisManga: ''
+            thisManga: '',
         }
     },
     components:{

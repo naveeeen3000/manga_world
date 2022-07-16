@@ -8,6 +8,8 @@ export default{
             email: '',
             pass: '',
             error:'',
+            emailVerifyAlert: false,
+            signedIn: false
         }
     }, 
     methods: {
@@ -30,11 +32,31 @@ export default{
             const res=await fetch(url,otherparams)
             let response=await res.json()
             if(res.status==201){
-                window.location='/login'
+                this.signedIn=true
+                
             }
             else{
-                confirm(response.data)
                 this.error=response.data
+            }
+        },
+        async verifyuser(){
+            let payload={
+                email: this.email
+            }
+            let url=process.env.VUE_APP_BASE_URL+'accounts/user/verify/'
+            let other_params={
+                'headers':{
+                    'Authorization': "Token "+process.env.VUE_APP_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                'body': JSON.stringify(payload),
+                'method': "POST"
+            }
+            const res=await fetch(url,other_params)
+            // let reponse=await res.json()
+            if(res.status==200){
+                this.emailVerifyAlert=true
+                // console.log(response)
             }
         }
     }
@@ -47,17 +69,29 @@ export default{
 
 
 <template>
+    <div v-if="emailVerifyAlert" class="alert alert-success alert-dismissible fade show" @load="verifyuser()" role="alert">
+        <strong>Congratulations!</strong> A verification mail has been sent to {{this.email}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    
     <div class="signup">
     <div class="bgimage"></div>
-        <div class="signup-from">
+        <div v-if="!signedIn" class="signup-from">
             <img class="signup-logo" src="../assets/logo.png" alt="not found" >
             <h3 class="form-heading">Signup</h3>
-            <form  action="/login">
+            <form action="">
                 <input v-model="name" type="text" placeholder="your name">
                 <input v-model="email" type="email" placeholder="your email">
                 <input v-model="pass" type="password" placeholder="your password">
                 <input class="submit-button" @click.prevent="submitDetails(ele)" type="submit" value="Signup">
-        </form>
+            </form>
+        </div>
+        <div v-if="signedIn" class="signup-from">
+            <h3>you've successfully signed up for <b>MangaWorld</b></h3>
+            <div class="redirect-buttons">
+                            <a href="/"><button class="btn btn-success">go home</button></a> 
+            <a href="/login"><button class="btn btn-success">login</button></a>
+            </div>
         </div>
     </div>
 </template>
@@ -139,4 +173,8 @@ img{
     height: 40px;
 }
 
+.redirect-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
 </style>
