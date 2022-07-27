@@ -28,28 +28,30 @@ export default{
         let out={'status':res.status,'data':d['data']}
         // console.log(out)
         this.search_result=out
-    },
-    invisible(){
-      document.getElementById('search-result').style.visibility='hidden'    
-    },
-    visible(){
-      document.getElementById('search-result').style.visibility='visible'    
     }
+  },
+  mounted(){
+    document.addEventListener('mouseup', function(e) {
+    var container = document.getElementById('search-result');
+    if (!container.contains(e.target)) {
+        container.style.display = 'none';
+    }
+});
   }
 }
 </script>
 
 <template>
   <nav class="">
-    <div class="heading">
+    <div class="branding">
       <a href="/">Manga World </a>
     </div>
     <div class="right">
 
     <div class="search">
-        <input placeholder="search for manga"  class="searchBar" type="text" v-model="query" @input="search(query)">
-        <div v-if="search_result.status==200"  @focusin="visible()" @focusout="invisible()"  class="results" id="search-result"> 
-          <div v-for="res in search_result.data" v-bind:key='res.manga_id'>
+        <input placeholder="search for manga" class="searchBar" type="text" v-model="query" @input="search(query)">
+        <div v-if="search_result.status==200" class="results" id="search-result"> 
+          <div v-for="res in search_result.data" v-bind:key='res.manga_id' class='search-result-li'>
             <div class="search-list" @click="this.show_modal=true;this.thisManga=res">
               <div class="search-poster">
                 <img v-bind:src="res['cover_image'] || null" alt="not found">
@@ -70,8 +72,8 @@ export default{
       </div>
     </div>
     <div v-else  class="accounts">
-      <a class="" href="/login">Login</a>
-      <a class="" href="/signup">Signup</a>
+      <a class="" href="#/login">Login</a>
+      <a class="" href="#/signup">Signup</a>
   <div class="main-nav">
   </div>
     </div>
@@ -114,11 +116,11 @@ nav a{
   color:white;
   text-decoration: none;
 }
-.heading{
+.branding{
     font-size: 30px;
     font-family: 'Fredoka One', cursive;
-    
 }
+
 .right{
   display: flex;
   margin-right:0px;
@@ -190,5 +192,8 @@ nav a{
   height: 2.9rem;
   margin-left:1rem;
   border-radius: 50%;
+}
+.search-result-li:hover{
+  cursor: pointer;
 }
 </style>

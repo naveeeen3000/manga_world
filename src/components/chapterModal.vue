@@ -3,6 +3,7 @@ export default{
     props:{
         chapter: Object,
         show: Boolean,
+        manga_id: String
     },
     data(){
         return{
@@ -21,7 +22,7 @@ export default{
         <div class="chapter-modal-wrapper">
             <div class="chapter-modal-container">
                 <div class="top">
-                    <a @click="$emit('close')" href="#"><i class="fi fi-rr-arrow-small-right"></i></a>
+                    <a @click="$emit('close')" :href="'#/read/'+manga_id"><i class="fi fi-rr-arrow-small-right"></i></a>
                     <h2>{{key}}</h2>
                     
                 </div>
@@ -57,9 +58,11 @@ export default{
 .chapter-modal-wrapper{
     display: table-cell;
     vertical-align: middle;
+    position: relative;
 }
 .chapter-modal-container{
-    width:80%;
+    border: 2px solid aquamarine;
+    width:80rem;
     margin:auto;
     background-color: rgb(0, 0, 0);
     /* padding:20px 30px; */
@@ -87,7 +90,13 @@ export default{
     display:flex;
     flex-direction: column;
     overflow:scroll;
-    height:50rem;
+    height:40rem;
     width:100%;
+}
+.manga-image{
+    margin-bottom: 10px;
+    /* height: 30rem; */
+    /* width: 30rem; */
+    /* overflow: hidden; */
 }
 </style>
