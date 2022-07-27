@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from "./router"
+// import router from "./router/router"
 import VueStorage from 'vue3-storage'
-createApp(App).use(router).use(VueStorage).mount('#app')
+createApp(App).use(VueStorage).mount('#app')

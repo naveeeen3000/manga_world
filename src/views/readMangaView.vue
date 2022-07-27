@@ -1,5 +1,4 @@
 <script>
-import navBar from '../components/navBar.vue';
 import readManga from '../components/readManga.vue'
 
 export default{
@@ -9,7 +8,6 @@ export default{
         }
     },
     components:{
-        navBar: navBar,
         readManga: readManga
     }
 }
@@ -17,7 +15,6 @@ export default{
 
 
 <template>
-    <navBar/>
     <readManga/>
 </template>
 

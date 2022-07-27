@@ -16,6 +16,7 @@ export default{
     ,
     methods:{
         async get_popular_manga(){
+            // console.log(this.$storage)
             let url=process.env.VUE_APP_BASE_URL+'api/v1/manga/popular'
             let other_params={
                 "headers":{

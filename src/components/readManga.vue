@@ -3,7 +3,7 @@ import chapterModal from './chapterModal.vue'
 export default{
     data(){
         return{
-            manga_id: this.$route.params.manga_id,
+            manga_id: window.location.hash.split('/')[2],
             manga: false,
             show_modal: false,
             thisChapter: {}
@@ -28,7 +28,7 @@ export default{
     },
     beforeMount(){
         this.get_manga()
-        console.log(this.manga)
+        // console.log(this.manga)
     },
     components:{
         chapterModal: chapterModal
@@ -63,13 +63,13 @@ export default{
             <h3>Chapters List</h3>
             <div class="chapters-container">
                 <div v-for="chapter in this.manga.chapters" :key="chapter" class="chapter">
-                    <span><a @click="this.show_modal=true;this.thisChapter=chapter" href='#'>{{Object.keys(chapter)[0]}}</a></span>
+                    <span class='chapter-link' @click="this.show_modal=true;this.thisChapter=chapter">{{Object.keys(chapter)[0]}}</span>
                 </div>
             </div>
         </div>
     </div>
     <Teleport to="body">
-        <chapterModal :show='this.show_modal' :chapter='this.thisChapter' @close='this.show_modal=false'/>
+        <chapterModal :show='this.show_modal' :manga_id='this.manga.manga_id' :chapter='this.thisChapter' @close='this.show_modal=false'/>
     </Teleport>
 </template>
 <style>
@@ -122,5 +122,9 @@ export default{
 .chapter a{
     text-decoration:none;
     color:aliceblue;
+}
+.chapter-link:hover{
+    cursor: pointer;
+    color:aqua;
 }
 </style>

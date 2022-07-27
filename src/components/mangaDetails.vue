@@ -19,15 +19,15 @@
                 </div>
                 <div class="modal-header">
                     <img v-if="this.manga.cover==null" src="../assets/error.png" alt="">
-                    <object v-else :data="this.manga.cover.small"  >
+                    <!-- <object v-else :data="this.manga.cover.small"  > -->
                         <img :src="this.manga.cover.original" alt="Just testing.">
-                    </object>
+                    <!-- </object> -->
                 </div>
                 <div class="modal-body">
                     <div class="poster">
                         <img :src="this.manga.cover_image" alt="">
                         <div class="modal-footer">
-                            <a :href="'/read/'+manga.manga_id"><button class="read-manga-button" >Read</button></a>
+                            <a :href="'#/read/'+this.manga.manga_id"><button class="read-manga-button" @click="$emit('close')" >Read</button></a>
                         </div>
                     </div>
                     <div class="info">

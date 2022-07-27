@@ -17,7 +17,6 @@ export default{
     methods:{
         async get_manga_by_genre(){
             let url=process.env.VUE_APP_BASE_URL+'api/v1/manga/?genre='+this.genre
-            console.log(this.genre)
             let other_params={
                 "headers":{
                     'Authorization':'Token '+process.env.VUE_APP_API_KEY
@@ -69,7 +68,8 @@ export default{
     margin:1.5rem;
     overflow: scroll;
     scroll-behavior: smooth;
-    padding: 10px;
+    padding: 0px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     /* justify-content: space-between; */
